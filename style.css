@@ -1,0 +1,51 @@
+@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
+
+body {
+    font: .905em/1.6 'Inconsolata', monospace;
+    font-weight: 400;
+    max-width: 28em;
+    background-color: rgb(63, 63, 63);
+    color:white;
+    margin: 1em 1em;
+  }
+
+input[type="text"]{
+    border: none;
+    font-family: inherit;
+    background: none;
+    padding:0 .5em;
+    font-size: inherit;
+    width: 100%;
+  }
+  input[type="text"]:focus{
+    background: none;
+    color: white;
+    outline:none;
+  }
+  .command{
+    color: white;
+    font-weight: 700;
+    font-size: 1.75em;
+    margin: 2em 0;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  #history {
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+
+  kbd{
+    font-family: 'Inconsolata', monospace;
+    border:1px solid #999;
+    text-transform: uppercase;
+    padding:0 .2em;
+  }
+  * {
+    margin:0;
+    padding:0;
+  }
+  pre {
+    line-height: 1;
+  }

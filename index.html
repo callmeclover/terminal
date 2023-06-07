@@ -1,0 +1,57 @@
+<html style="width: 100%; height: 100%;">
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body style="width: 100%; height: 100%; overflow:hidden;">
+     <!-- <hr style="position: relative;left:17px;width:100vw;border: none;border-top: 3px double #fff;height:5px;color: #fff;height: 5px;" />
+-->
+        <main style="position:relative; bottom: 20px; width: 100%; height: 100%;">
+          <pre style="position:fixed;left: -35px;">
+            <h3>
+        
+                        ███   ███                          
+                 ░░███  ░░░   ░░░                        
+          ██████  ░███  ████  ████  █████ ████ ████████  
+         ███░░███ ░███ ░░███ ░░███ ░░███ ░███ ░░███░░███ 
+        ░███ ░░░  ░███  ░███  ░███  ░███ ░███  ░███ ░███ 
+        ░███  ███ ░███  ░███  ░███  ░███ ░███  ░███ ░███ 
+        ░░██████  █████ █████ █████ ░░████████ ████ █████
+         ░░░░░░  ░░░░░ ░░░░░ ░░░░░   ░░░░░░░░ ░░░░ ░░░░░ 
+        
+         <span style="font-size: 1.2em;">command line interface in u network</span></h3></pre>
+
+  <div id='history' style="position:relative; top: 200px; height: 55%;width: 100vw;overflow: auto;overflow-x:hidden; margin-left: 30px;">
+  <p>welcome to cliium, type <kbd>help</kbd> to view a list of commands.</p>
+<p>p.s: this web app can run a custom language, the <strong>scriptr</strong> language!</p><br>
+
+
+</div>
+  
+  <span style="position:absolute;bottom: 20; left:40;" class="command" id='fCmd'><span style='white-space: nowrap;'>guest:</span> <code><span style='white-space: nowrap;' id='path'>/home/</span></code>&nbsp;||&nbsp;<input id="cmd" type="text"></span></main>
+
+  <script type="module">
+    var f = document.getElementById('cmd')
+    var g = document.getElementById('history')
+    f.addEventListener('keyup', function(e) {
+		if((e.keyCode || e.which) == 13) {// ENTER key pressed
+			var targetValue = f.value;
+      f.value = ''
+
+        if (targetValue.slice(0, 4) == 'help') {
+          g.insertAdjacentHTML('beforeend', '<p> .............. help menu: ..............<br>help ............... display this menu<br>test &lt;display&gt; ..... display text<br>scriptr ....... open the scriptr console</p><br>')
+        } else if (targetValue.slice(0, 4) == 'test') {
+          g.insertAdjacentHTML('beforeend', '<p>' + targetValue.slice(5) + '</p><br>')
+        } else if (cmdArray.includes(targetValue) == false) {
+				g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>')
+			}
+		}
+	});
+
+  var cmdArray = [
+      'help',
+      'test'
+  ]
+  </script>
+    </body>
+</html>
