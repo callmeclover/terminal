@@ -40,8 +40,9 @@
 			var targetValue = f.value;
       f.value = ''
 
+      if (targetValue.split('')[0] == null) {
 
-      if (targetValue.split(' ')[0].toLowerCase() == 'help') {
+    } else if (targetValue.split(' ')[0].toLowerCase() == 'help') {
         if (targetValue.split(' ')[1] != null) {
           if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1])) {
           cmds[targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1]]();
