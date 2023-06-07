@@ -1,5 +1,6 @@
 <html style="width: 100%; height: 100%;">
     <head>
+        <title>command line interface in u network</title>
         <link rel="stylesheet" href="style.css">
     </head>
 
@@ -10,8 +11,8 @@
           <pre style="position:fixed;left: -35px;">
             <h3>
         
-                        ███   ███                          
-                 ░░███  ░░░   ░░░                        
+                         ███   ███                          
+                 ░░███   ░░░   ░░░                        
           ██████  ░███  ████  ████  █████ ████ ████████  
          ███░░███ ░███ ░░███ ░░███ ░░███ ░███ ░░███░░███ 
         ░███ ░░░  ░███  ░███  ░███  ░███ ░███  ░███ ░███ 
@@ -22,13 +23,14 @@
          <span style="font-size: 1.2em;">command line interface in u network</span></h3></pre>
 
   <div id='history' style="position:relative; top: 200px; height: 55%;width: 100vw;overflow: auto;overflow-x:hidden; margin-left: 30px;">
-  <p>welcome to cliium, type <kbd>help</kbd> to view a list of commands.</p>
-<p>p.s: this web app can run a custom language, the <strong>scriptr</strong> language!</p><br>
+  <p>welcome to cliiun, type <kbd>help</kbd> to view a list of commands.</p>
+<p>p.s: this web app can run a custom language, the <strong>scriptr</strong> language! (and javascript)</p><br>
 
 
 </div>
   
-  <span style="position:absolute;bottom: 20; left:40;" class="command" id='fCmd'><span style='white-space: nowrap;'>guest:</span> <code><span style='white-space: nowrap;' id='path'>/home/</span></code>&nbsp;||&nbsp;<input id="cmd" type="text"></span></main>
+  <span style="position:absolute;bottom: 20; left:40;" class="command" id='fCmd'><span id='user' style='white-space: nowrap;'>guest:</span> <code><span style='white-space: nowrap;' id='path'>/home/</span></code>&nbsp;>&nbsp;<input id="cmd" type="text"></span></main>
+
 
   <script type="module">
     var f = document.getElementById('cmd')
@@ -38,20 +40,93 @@
 			var targetValue = f.value;
       f.value = ''
 
-        if (targetValue.slice(0, 4) == 'help') {
-          g.insertAdjacentHTML('beforeend', '<p> .............. help menu: ..............<br>help ............... display this menu<br>test &lt;display&gt; ..... display text<br>scriptr ....... open the scriptr console</p><br>')
-        } else if (targetValue.slice(0, 4) == 'test') {
-          g.insertAdjacentHTML('beforeend', '<p>' + targetValue.slice(5) + '</p><br>')
-        } else if (cmdArray.includes(targetValue) == false) {
-				g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>')
-			}
+
+      if (targetValue.split(' ')[0].toLowerCase() == 'help') {
+        if (targetValue.split(' ')[1] != null) {
+          if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1])) {
+          cmds[targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1]]();
+          g.scrollTo(g.scrollHeight);
+        } else {
+          g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
+          g.scrollTo(g.scrollHeight);
+        }
+        } else {
+          if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase())) {
+          cmds[targetValue.split(' ')[0].toLowerCase()]();
+          g.scrollTo(g.scrollHeight);
+        } else {
+          g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
+          g.scrollTo(g.scrollHeight);
+        }
+        }
+      } else {
+        if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase())) {
+          cmds[targetValue.split(' ')[0].toLowerCase()](targetValue.split(' ')[1]);
+          g.scrollTo(g.scrollHeight);
+        } else {
+          g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
+          g.scrollTo(g.scrollHeight);
+        }
+      }
+      
+        
 		}
 	});
 
-  var cmdArray = [
-      'help',
-      'test'
-  ]
+  const cmds = {
+    "help": function help() {g.insertAdjacentHTML('beforeend', helpMenuPGN)},
+    "help1": function help1() {g.insertAdjacentHTML('beforeend', helpMenuPG1)},
+    "help2": function help2() {g.insertAdjacentHTML('beforeend', helpMenuPG2)},
+    "help3": function help3() {g.insertAdjacentHTML('beforeend', helpMenuPG3)},
+    "test": function test(text) {g.insertAdjacentHTML('beforeend', '<p>' + text + '</p><br>')},
+    "javascript": function javascriptr(script) { eval(script) },
+    "login": function login(user) { document.getElementById('user').textContent = user + ':' },
+    "dir": function dir(path) { document.getElementById('path').textContent = path + ':' },
+    "dirls": function dirls() { g.insertAdjacentHTML('beforeend', fakeFileList) },
+}
+
+
+var helpMenuPGN = `
+<p> .......................................... help menu: ..........................................<br>
+help &lt;pg. number&gt; ............... display a help menu. will display this if no page number is given.<br>
+help 1 .......................... dev commands.<br>
+help 2 .......................... scripting commands.<br>
+help 3 .......................... utility commands.</p><br>
+`
+
+var helpMenuPG1 = `
+<p> ................ dev menu: ................<br>
+help 1 .......................... display this.<br>
+test &lt;display&gt; .................. display text.<br>
+login &lt;user&gt; .................. login.</p><br>
+`
+
+var helpMenuPG2 = `
+<p> ............. scripting menu: .............<br>
+help 2 .......................... display this.<br>
+scriptr &lt;script&gt; ....... open the scriptr runtime.<br>
+javascript &lt;script&gt; ....... open the javascript runtime.</p><br>
+`
+
+var helpMenuPG3 = `
+<p> .............. utility menu: ..............<br>
+help 3 .......................... display this.<br>
+dir ......................... change directory.<br>
+dirls ....................... display this.</p><br>
+`
+
+var fakeFileList = `
+<pre style='line-height: 1.25;'>
+<p>
+.
+├── fake/
+│   ├── directory
+│   └── because
+├── this
+└── doesn't/
+    └── work/
+        └── yet</p></pre><br>
+`
   </script>
     </body>
 </html>
