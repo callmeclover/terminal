@@ -46,27 +46,27 @@
         if (targetValue.split(' ')[1] != null) {
           if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1])) {
           cmds[targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1]]();
-          g.scrollTo(g.scrollHeight);
+          g.scrollBy(10000);
         } else {
           g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-          g.scrollTo(g.scrollHeight);
+          g.scrollBy(10000);
         }
         } else {
           if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase())) {
           cmds[targetValue.split(' ')[0].toLowerCase()]();
-          g.scrollTo(g.scrollHeight);
+          g.scrollBy(10000);
         } else {
           g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-          g.scrollTo(g.scrollHeight);
+          g.scrollBy(10000);
         }
         }
       } else {
         if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase())) {
           cmds[targetValue.split(' ')[0].toLowerCase()](targetValue.split(' ')[1]);
-          g.scrollTo(g.scrollHeight);
+          g.scrollBy(10000);
         } else {
           g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-          g.scrollTo(g.scrollHeight);
+          g.scrollBy(10000);
         }
       }
       
