@@ -46,27 +46,27 @@
         if (targetValue.split(' ')[1] != null) {
           if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1])) {
           cmds[targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1]]();
-          g.scrollBy(10000);
+          g.getElementById('history').scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
         } else {
           g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-          g.scrollBy(10000);
+          g.getElementById('history').scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
         }
         } else {
           if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase())) {
           cmds[targetValue.split(' ')[0].toLowerCase()]();
-          g.scrollBy(10000);
+          g.getElementById('history').scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
         } else {
           g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-          g.scrollBy(10000);
+          g.getElementById('history').scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
         }
         }
       } else {
         if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase())) {
           cmds[targetValue.split(' ')[0].toLowerCase()](targetValue.split(' ')[1]);
-          g.scrollBy(10000);
+          g.getElementById('history').scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
         } else {
           g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-          g.scrollBy(10000);
+         g.getElementById('history').scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
         }
       }
       
