@@ -46,27 +46,27 @@
         if (targetValue.split(' ')[1] != null) {
           if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1])) {
           cmds[targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1]]();
-          g.scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
+          document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
         } else {
           g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-          g.scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
+          document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
         }
         } else {
           if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase())) {
           cmds[targetValue.split(' ')[0].toLowerCase()]();
-          g.scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
+          document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
         } else {
           g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-          g.scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
+          document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
         }
         }
       } else {
         if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase())) {
           cmds[targetValue.split(' ')[0].toLowerCase()](targetValue.split(' ')[1]);
-          g.scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
+          document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
         } else {
-          g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-         g.scrollTo({ top: g.getElementById('history').scrollHeight, behavior: 'smooth' })
+          g.insertAdjacentHTML('beforeend', '<p>command not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
+         document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
         }
       }
       
@@ -84,6 +84,7 @@
     "login": function login(user) { document.getElementById('user').textContent = user + ':' },
     "dir": function dir(path) { document.getElementById('path').textContent = path + ':' },
     "dirls": function dirls() { g.insertAdjacentHTML('beforeend', fakeFileList) },
+    "del": function del(fd) { g.insertAdjacentHTML('beforeend', 'Deleted file/directory: \'' + fd + '\'.') },
 }
 
 
@@ -113,7 +114,8 @@ var helpMenuPG3 = `
 <p> .............. utility menu: ..............<br>
 help 3 .......................... display this.<br>
 dir ......................... change directory.<br>
-dirls ....................... display this.</p><br>
+dirls ....................... display this.
+del &lt;f/d&gt; ....................... display this.</p><br>
 `
 
 var fakeFileList = `
