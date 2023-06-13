@@ -1,14 +1,14 @@
-<html style="width: 100%; height: 100%;">
-    <head>
-        <title>command line interface in u network</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
+<html style="width: 100%; height: 100%">
+  <head>
+    <title>command line interface in u network</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-    <body style="width: 100%; height: 100%; overflow:hidden;">
-     <!-- <hr style="position: relative;left:17px;width:100vw;border: none;border-top: 3px double #fff;height:5px;color: #fff;height: 5px;" />
+  <body style="width: 100%; height: 100%; overflow: hidden">
+    <!-- <hr style="position: relative;left:17px;width:100vw;border: none;border-top: 3px double #fff;height:5px;color: #fff;height: 5px;" />
 -->
-        <main style="position:relative; bottom: 20px; width: 100%; height: 100%;">
-          <pre style="position:fixed;left: -35px;">
+    <main style="position: relative; bottom: 20px; width: 100%; height: 100%">
+      <pre style="position: fixed; left: -35px">
             <h3>
         
                          ███   ███                          
@@ -22,115 +22,146 @@
         
          <span style="font-size: 1.2em;">command line interface in u network</span></h3></pre>
 
-  <div id='history' style="position:relative; top: 200px; height: 55%;width: 100vw;overflow: auto;overflow-x:hidden; margin-left: 30px;">
-  <p>welcome to cliiun, type <kbd>help</kbd> to view a list of commands.</p>
-<p>p.s: this web app can run a custom language, the <strong>scriptr</strong> language! (and javascript)</p><br>
+      <div
+        id="history"
+        style="
+          position: relative;
+          top: 200px;
+          height: 55%;
+          width: 100vw;
+          overflow: auto;
+          overflow-x: hidden;
+          margin-left: 30px;
+        "
+      >
+        <p>
+          welcome to cliiun, type <kbd>help</kbd> to view a list of commands.
+        </p>
+        <p>
+          p.s: this web app can run a custom language, the
+          <strong>scriptr</strong> language! (and javascript)
+        </p>
+        <br />
+      </div>
 
+      <span
+        style="position: absolute; bottom: 20; left: 40"
+        class="command"
+        id="fCmd"
+        ><span id="user" style="white-space: nowrap">guest:</span>
+        <code><span style="white-space: nowrap" id="path">/home/</span></code
+        >&nbsp;>&nbsp;<input id="cmd" type="text"
+      /></span>
+    </main>
 
-</div>
-  
-  <span style="position:absolute;bottom: 20; left:40;" class="command" id='fCmd'><span id='user' style='white-space: nowrap;'>guest:</span> <code><span style='white-space: nowrap;' id='path'>/home/</span></code>&nbsp;>&nbsp;<input id="cmd" type="text"></span></main>
-
-
-  <script type="module">
-    var f = document.getElementById('cmd')
-    var g = document.getElementById('history')
-    f.addEventListener('keyup', function(e) {
-		if((e.keyCode || e.which) == 13) {// ENTER key pressed
-			var targetValue = f.value;
-      f.value = ''
-
-      if (targetValue.split('')[0] == null) {
-
-    } else if (targetValue.split(' ')[0].toLowerCase() == 'help') {
-        if (targetValue.split(' ')[1] != null) {
-          if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1])) {
-          cmds[targetValue.split(' ')[0].toLowerCase() + targetValue.split(' ')[1]]();
-          document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
-        } else {
-          g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-          document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
-        }
-        } else {
-          if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase())) {
-          cmds[targetValue.split(' ')[0].toLowerCase()]();
-          document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
-        } else {
-          g.insertAdjacentHTML('beforeend', '<p>comand not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-          document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
-        }
-        }
-      } else {
-        if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase())) {
-          cmds[targetValue.split(' ')[0].toLowerCase()](targetValue.split(' ')[1]);
-          document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
-        } else {
-          g.insertAdjacentHTML('beforeend', '<p>command not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
-         document.getElementById('history').scrollTo({ top: document.getElementById('history').scrollHeight, behavior: 'smooth' })
-        }
+    <script type="module">
+          const STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
+          const ARGUMENT_NAMES = /([^\s,]+)/g;
+          function getParamNames(func) {
+            var fnStr = func.toString().replace(STRIP_COMMENTS, '');
+            var result = fnStr.slice(fnStr.indexOf('(')+1, fnStr.indexOf(')')).match(ARGUMENT_NAMES);
+            if (result === null)
+               result = [];
+            return result;
       }
-      
-        
-		}
-	});
 
-  const cmds = {
-    "help": function help() {g.insertAdjacentHTML('beforeend', helpMenuPGN)},
-    "help1": function help1() {g.insertAdjacentHTML('beforeend', helpMenuPG1)},
-    "help2": function help2() {g.insertAdjacentHTML('beforeend', helpMenuPG2)},
-    "help3": function help3() {g.insertAdjacentHTML('beforeend', helpMenuPG3)},
-    "test": function test(text) {g.insertAdjacentHTML('beforeend', '<p>' + text + '</p><br>')},
-    "javascript": function javascriptr(script) { eval(script) },
-    "login": function login(user) { document.getElementById('user').textContent = user + ':' },
-    "dir": function dir(path) { document.getElementById('path').textContent = path + ':' },
-    "dirls": function dirls() { g.insertAdjacentHTML('beforeend', fakeFileList) },
-    "del": function del(fd) { g.insertAdjacentHTML('beforeend', 'Deleted file/directory: \'' + fd + '\'.') },
-}
+          var f = document.getElementById('cmd')
+          var g = document.getElementById('history')
+          f.addEventListener('keyup', function(e) {
+      		if((e.keyCode || e.which) == 13) {// ENTER key pressed
+      			var targetValue = f.value;
+            f.value = ''
+
+            if (targetValue.split('')[0] == null) {
+
+          } else {
+                var params = targetValue.split(' ').splice(1, 2);
+                var paramsm1 = params.splice(1, 2);
+                if (cmds.hasOwnProperty(targetValue.split(' ')[0].toLowerCase())) {
+                  if (getParamNames(cmds[targetValue.split(' ')[0].toLowerCase()]).length == '0') {
+                    cmds[targetValue.split(' ')[0].toLowerCase()]();
+                  } else if (getParamNames(cmds[targetValue.split(' ')[0].toLowerCase()]).length == '1') {
+                    cmds[targetValue.split(' ')[0].toLowerCase()](params.join(' '));
+                  } else if (getParamNames(cmds[targetValue.split(' ')[0].toLowerCase()]).length == '2') {
+                    cmds[targetValue.split(' ')[0].toLowerCase()](params[0], paramsm1.join(' '));
+                  }
+                  g.scrollTo({ top: g.scrollHeight, behavior: 'smooth' })
+
+              } else {
+                g.insertAdjacentHTML('beforeend', '<p>command not found :(<br>type <kbd>help</kbd> for a list of commands</p><br>');
+                g.scrollTo({ top: g.scrollHeight, behavior: 'smooth' })
+              }
+              }
+            }
+      		});
+
+        const cmds = {
+          "help": function help(num) {if (num == '') { help0() } else if (num == 1) { help1() } else if (num == 2) { help2() } else if (num == 3) { help3() } else if (num == 4) { help4() }},
+          "help1": function help1() {g.insertAdjacentHTML('beforeend', helpMenuPG1)},
+          "help2": function help2() {g.insertAdjacentHTML('beforeend', helpMenuPG2)},
+          "help3": function help3() {g.insertAdjacentHTML('beforeend', helpMenuPG3)},
+          "help4": function help4() {g.insertAdjacentHTML('beforeend', helpMenuPG4)},
+          "test": function test(text) {g.insertAdjacentHTML('beforeend', '<p>' + text + '</p><br>')},
+          "javascript": function javascriptr(script) { eval(script) },
+          "login": function login(user) { document.getElementById('user').textContent = user + ':' },
+          "dir": function dir(type, path) { if (type == 'ls') { g.insertAdjacentHTML('beforeend', fakeFileList) } else if (type == 'rd') { document.getElementById('path').textContent = path + ':' } else { g.insertAdjacentHTML('beforeend', 'Incorrect parameters.')}},
+          "del": function del(fd) { g.insertAdjacentHTML('beforeend', 'Deleted file: \'' + fd + '\'.') },
+      }
 
 
-var helpMenuPGN = `
-<p> .......................................... help menu: ..........................................<br>
-help &lt;pg. number&gt; ............... display a help menu. will display this if no page number is given.<br>
-help 1 .......................... dev commands.<br>
-help 2 .......................... scripting commands.<br>
-help 3 .......................... utility commands.</p><br>
-`
+      var helpMenuPGN = `
+      <p> .......................................... help menu: ..........................................<br>
+      help &lt;pg. number&gt; ............... display a help menu. will display this if no page number is given.<br>
+      help 1 .......................... dev commands.<br>
+      help 2 .......................... scripting commands.<br>
+      help 3 .......................... utility commands.<br>
+      help 4 .......................... import commands.</p><br>
+      `
 
-var helpMenuPG1 = `
-<p> ................ dev menu: ................<br>
-help 1 .......................... display this.<br>
-test &lt;display&gt; .................. display text.<br>
-login &lt;user&gt; .................. login.</p><br>
-`
+      var helpMenuPG1 = `
+      <p> ................ dev menu: ................<br>
+      help 1 ............................ display this.<br>
+      test &lt;display&gt; .................. display text.<br>
+      login &lt;user&gt; .................. login.</p><br>
+      `
 
-var helpMenuPG2 = `
-<p> ............. scripting menu: .............<br>
-help 2 .......................... display this.<br>
-scriptr &lt;script&gt; ....... open the scriptr runtime.<br>
-javascript &lt;script&gt; ....... open the javascript runtime.</p><br>
-`
+      var helpMenuPG2 = `
+      <p> ............. scripting menu: .............<br>
+      help 2 .......................... display this.<br>
+      scriptr &lt;script&gt; ....... open the scriptr runtime.<br>
+      javascript &lt;script&gt; ....... open the javascript runtime.</p><br>
+      `
 
-var helpMenuPG3 = `
-<p> .............. utility menu: ..............<br>
-help 3 .......................... display this.<br>
-dir ......................... change directory.<br>
-dirls ....................... display this.
-del &lt;f/d&gt; ....................... display this.</p><br>
-`
+      var helpMenuPG3 = `
+      <p> .............. utility menu: ..............<br>
+      help 3 .......................... display this.<br>
+      dir &lt;type&gt; &lt;dir&gt; ......... change directory.<br>
+      del &lt;f/d&gt; ................... display this.</p><br>
+      `
 
-var fakeFileList = `
-<pre style='line-height: 1.25;'>
-<p>
-.
-├── fake/
-│   ├── directory
-│   └── because
-├── this
-└── doesn't/
-    └── work/
-        └── yet</p></pre><br>
-`
+      var helpMenuPG4 = `
+      <p> ................ import menu: ................<br>
+      whoops ;) it looks like i haven't implemented this yet</p><br>
+      `
 
-  </script>
-    </body>
+      var fakeFileList = `
+      <pre style='line-height: 1.25;'>
+      <p>
+      .
+      ├── fake/
+      │   ├── directory
+      │   └── because
+      ├── this
+      └── doesn't/
+          └── work/
+              └── yet</p></pre><br>
+      `
+
+      function help0() {g.insertAdjacentHTML('beforeend', helpMenuPGN)}
+      function help1() {g.insertAdjacentHTML('beforeend', helpMenuPG1)}
+      function help2() {g.insertAdjacentHTML('beforeend', helpMenuPG2)}
+      function help3() {g.insertAdjacentHTML('beforeend', helpMenuPG3)}
+      function help4() {g.insertAdjacentHTML('beforeend', helpMenuPG4)}
+    </script>
+  </body>
 </html>
