@@ -101,6 +101,7 @@
           "help2": function help2() {g.insertAdjacentHTML('beforeend', helpMenuPG2)},
           "help3": function help3() {g.insertAdjacentHTML('beforeend', helpMenuPG3)},
           "help4": function help4() {g.insertAdjacentHTML('beforeend', helpMenuPG4)},
+          "site": function site(webpage) {g.insertAdjacentHTML('beforeend', '<iframe id="inlineFrameExample" width="300" height="200" src="' + webpage + '"></iframe>')},
           "test": function test(text) {g.insertAdjacentHTML('beforeend', '<p>' + text + '</p><br>')},
           "javascript": function javascriptr(script) { eval(script) },
           "login": function login(user) { document.getElementById('user').textContent = user + ':' },
