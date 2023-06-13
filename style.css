@@ -1,5 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
 
+iframe {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    width: 100%; /* takes precedence over the width set with the HTML width attribute */
+  	border-radius: 10px;
+}
+
 body {
     font: .905em/1.6 'Inconsolata', monospace;
     font-weight: 400;
